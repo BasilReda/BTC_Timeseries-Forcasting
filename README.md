@@ -65,6 +65,15 @@ The project acts as an advanced statistical interface enabling users to:
    ```
 
 3. **Install dependencies**
+   The application requires the following Python dependencies (defined in `requirements.txt`):
+   - `streamlit==1.28.1`
+   - `plotly==5.17.0`
+   - `pandas==2.0.3`
+   - `numpy==1.24.3`
+   - `scikit-learn==1.3.2`
+   - `statsmodels==0.14.0`
+   - `scipy`
+   
    ```bash
    pip install -r requirements.txt
    ```
@@ -91,6 +100,19 @@ The uploaded CSV should contain:
 - Optional: Additional columns will be ignored.
 
 ## 🔧 Configuration Guide
+
+### Handling Crypto-Market Volatility
+Cryptocurrency markets are notoriously volatile, prone to sudden spikes and sharp corrections. This application assesses and handles volatility by offering two contrasting modeling paradigms:
+
+**1. ARIMA (Auto-Regressive Integrated Moving Average):**
+- Handles volatility through its differencing parameter `d`, smoothing extreme fluctuations and stabilizing the mean of the time series.
+- Employs autoregressive `p` and moving average `q` components to trace momentum and rapidly correct predictions following transient shocks.
+- Outputs confidence intervals that naturally widen over time, reflecting increased uncertainty in long-term predictions of volatile assets.
+
+**2. Decision Tree Regressor:**
+- Non-linear machine learning algorithm capable of capturing abrupt, asymmetrical price jumps that linear statistical models might miss.
+- Isolates distinct price breakpoints without strictly adhering to linear trends, handling structural breaks effectively.
+- Residual-based confidence intervals are computed using z-scores to visualize the expected margin of unpredictable market swings during out-of-sample forecasts.
 
 ### Model Selection Impact
 
